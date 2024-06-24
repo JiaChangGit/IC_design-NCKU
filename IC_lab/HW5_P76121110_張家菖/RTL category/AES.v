@@ -23,7 +23,7 @@ wire [DATA_W-1:0] stateArr_tmp [NO_ROUNDS - 1:0];
 wire [DATA_W-1:0] result;
 reg [3:0] roundCounter;   //  >= NO_ROUNDS
 
-	KeyExpansion KE_first(.oldKey(K), .currentRound(0), .newKey(fullkeys_tmp[0]));
+	KeyExpansion KE_first(.oldKey(K), .currentRound(4'b0000), .newKey(fullkeys_tmp[0]));
 	AddRoundKey AddRK_first (.in(P), .key(K), .out(stateArr_tmp[0]));
 
 
