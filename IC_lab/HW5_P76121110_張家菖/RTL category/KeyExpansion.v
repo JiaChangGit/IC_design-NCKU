@@ -5,7 +5,7 @@ parameter DATA_W = 128,      //data width
 parameter KEY_L = 128,       //key length
 parameter NO_ROUNDS = 10     //number of rounds
 )
-(input [0:KEY_L-1] oldKey, input [0:NO_ROUNDS-1] currentRound, output reg [0:KEY_L-1] newKey);
+(input [0:KEY_L-1] oldKey, input [0:3] currentRound, output reg [0:KEY_L-1] newKey);
 
 	reg [0:31] tmp;
 	wire [31:0] RCON [0:NO_ROUNDS-1];                       //round constant array of words

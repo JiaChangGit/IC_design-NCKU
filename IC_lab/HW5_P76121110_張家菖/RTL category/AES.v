@@ -23,14 +23,14 @@ wire [DATA_W-1:0] stateArr_tmp [NO_ROUNDS - 1:0];
 wire [DATA_W-1:0] result;
 reg [3:0] roundCounter;   //  >= NO_ROUNDS
 
-	KeyExpansion KE_first(.oldKey(K), .currentRound(4'b0000), .newKey(fullkeys_tmp[0]));
+	KeyExpansion KE_first(.oldKey(K), .currentRound(4'd0), .newKey(fullkeys_tmp[0]));
 	AddRoundKey AddRK_first (.in(P), .key(K), .out(stateArr_tmp[0]));
 
 
 	genvar i;
 	generate
 		for(i = 1; i < NO_ROUNDS; i = i + 1) begin: ROUND
-			KeyExpansion KE(.oldKey(fullkeys[i - 1]), .currentRound(i), .newKey(fullkeys_tmp[i]));
+			KeyExpansion KE(.oldKey(fullkeys[i - 1]), .currentRound(i[3:0]), .newKey(fullkeys_tmp[i]));
 			EncryptRound ER(.in(stateArr[i - 1]), .key(fullkeys[i - 1]), .out(stateArr_tmp[i]));
 		end
 		LastEncryptRound LastER(.in(stateArr[NO_ROUNDS - 1]), .key(fullkeys[NO_ROUNDS - 1]), .out(result));
